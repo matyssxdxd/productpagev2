@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Item from '../components/Item';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Item from "../components/Item";
 
 export interface Product {
   sku: string;
@@ -16,7 +16,6 @@ export interface Product {
 }
 
 function Home() {
-
   const [products, setProducts] = useState<Product[]>([]);
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -25,16 +24,16 @@ function Home() {
   }, []);
 
   const handleItemChange = (itemId: string, isChecked: boolean) => {
-    if(isChecked) {
-        setSelected([...selected, itemId]);
+    if (isChecked) {
+      setSelected([...selected, itemId]);
     } else {
-        setSelected(selected.filter(id => id !== itemId));
+      setSelected(selected.filter((id) => id !== itemId));
     }
-}
+  };
 
   const getProducts = () => {
     axios
-      .get('http://127.0.0.1:8989/api/getproducts')
+      .get("http://127.0.0.1:8989/api/getproducts")
       .then((response) => {
         setProducts(response.data);
       })
@@ -45,16 +44,19 @@ function Home() {
 
   const massDelete = () => {
     if (selected.length !== 0) {
-      selected.forEach(id => {
-        axios.get(`http://127.0.0.1:8989/deleteproduct/${id}`)
-        .then(response => {
-          console.log(response.data);
-          setSelected((current) => current.filter((sku) => sku != id));
-          getProducts();
-        })
-      })
+      selected.forEach((id) => {
+        axios
+          .post("http://127.0.0.1:8989/api/deleteproduct", {
+            sku: id,
+          })
+          .then((response) => {
+            console.log(response.data);
+            setSelected((current) => current.filter((sku) => sku !== id));
+            getProducts();
+          });
+      });
     }
-  }
+  };
 
   // const removeSecond = () => {
   //   setFruits((current) =>
@@ -73,7 +75,11 @@ function Home() {
       </div>
       <div className="item-container">
         {products.map((product) => (
-          <Item key={product.sku} product={product} onChange={handleItemChange}/>
+          <Item
+            key={product.sku}
+            product={product}
+            onChange={handleItemChange}
+          />
         ))}
       </div>
     </>

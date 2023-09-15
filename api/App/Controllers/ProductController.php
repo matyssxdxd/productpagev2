@@ -64,8 +64,7 @@ class ProductController
 
     public function deleteProduct()
     {
-        echo explode("/", $_SERVER["REQUEST_URI"])[2];
-        die();
-        (new ProductsModel())->deleteProduct($sku);
+        $input = json_decode(file_get_contents("php://input"));
+        (new ProductsModel())->deleteProduct($input->sku);
     }
 }

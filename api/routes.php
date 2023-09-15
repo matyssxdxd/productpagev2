@@ -12,7 +12,7 @@ $router->get("/api/getproducts", [
     "method" => "getProducts"
 ]);
 
-$router->get("/api/deleteproduct", [
+$router->post("/api/deleteproduct", [
     "controller" => "ProductController",
     "method" => "deleteProduct"
 ]);

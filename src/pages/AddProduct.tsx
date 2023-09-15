@@ -38,7 +38,10 @@ function AddProduct() {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     axios
-      .post("http://127.0.0.1:8989/api/addproduct", document.querySelector('#product_form'))
+      .post(
+        "http://127.0.0.1:8989/api/addproduct",
+        document.querySelector("#product_form")
+      )
       .then(() => {
         navigate("/");
       })
@@ -53,9 +56,7 @@ function AddProduct() {
         <h1>Product Add</h1>
         <div className="nav-btn">
           <button form="product_form">Save</button>
-          <Link to="/">
-            <button>Cancel</button>
-          </Link>
+          <Link to="/">Cancel</Link>
         </div>
       </div>
       <div className="form-container">
