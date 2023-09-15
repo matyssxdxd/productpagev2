@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Core\Product;
-
-class DVDModel extends Product
+class DVDModel extends ProductModel
 {
 
     private int $size;
@@ -23,6 +21,16 @@ class DVDModel extends Product
 
     public function saveProduct(): array
     {
+        if (empty($this->getSize())) {
+            return ['status' => 400, 'message' => 'Please, submit required data'];
+        }
+        if (!is_numeric($this->getPrice()) || !is_numeric($this->getSize())) {
+            return ['status' => 400, 'message' => 'Please, provide the data of indicated type'];
+        }
+        if ($this->isSkuTaken($this->getSku())) {
+            return ['status' => 400, 'message' => 'SKU is already taken'];
+        }
+
         $this->query("INSERT INTO products(sku, name, price, type, size) VALUES (:sku, :name, :price, :type, :size)", [
             "sku" => $this->getSku(),
             "name" => $this->getName(),
@@ -31,7 +39,7 @@ class DVDModel extends Product
             "size" => $this->getSize()
         ]);
 
-        return [];
+        return ["status" => 200];
     }
 
 }

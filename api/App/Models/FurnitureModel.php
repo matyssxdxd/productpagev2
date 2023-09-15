@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Core\Product;
-
-class FurnitureModel extends Product
+class FurnitureModel extends ProductModel
 {
 
     private int $height;
@@ -49,6 +47,16 @@ class FurnitureModel extends Product
 
     public function saveProduct(): array
     {
+        if (empty($this->getHeight()) || empty($this->getWidth()) || empty($this->getLength())) {
+            return ['status' => 0, 'message' => 'Please, submit required data'];
+        }
+        if (!is_numeric($this->getPrice()) || !is_numeric($this->getHeight()) || !is_numeric($this->getWidth()) || !is_numeric($this->getLength())) {
+            return ['status' => 0, 'message' => 'Please, provide the data of indicated type'];
+        }
+        if ($this->isSkuTaken($this->getSku())) {
+            return ['status' => 400, 'message' => 'SKU is already taken'];
+        }
+
         $this->query("INSERT INTO products(sku, name, price, type, height, width, length) VALUES (:sku, :name, :price, :type, :height, :width, :length)", [
             "sku" => $this->getSku(),
             "name" => $this->getName(),
@@ -59,7 +67,7 @@ class FurnitureModel extends Product
             "length" => $this->getLength()
         ]);
 
-        return [];
+        return ["status" => 200];
     }
 
 

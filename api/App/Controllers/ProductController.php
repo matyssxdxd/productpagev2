@@ -18,11 +18,16 @@ class ProductController
         $sku = $product->inputs->sku;
         $price = (int)$product->inputs->price;
         $productType = $product->inputs->type;
-        $weight = $product->attributes->weight ?? null;
-        $size = $product->attributes->size ?? null;
-        $height = $product->attributes->height ?? null;
-        $width = $product->attributes->width ?? null;
-        $length = $product->attributes->length ?? null;
+        $weight = (int)$product->attributes->weight ?? null;
+        $size = (int)$product->attributes->size ?? null;
+        $height = (int)$product->attributes->height ?? null;
+        $width = (int)$product->attributes->width ?? null;
+        $length = (int)$product->attributes->length ?? null;
+
+        if (empty($productType) || empty($name) || empty($sku) || empty($price)) {
+            echo json_encode(["status" => 400, "message" => "Please provide the required data"]);
+            die();
+        }
 
         match ($productType) {
             'Book' => $productClass = (new BookModel()),
@@ -43,6 +48,6 @@ class ProductController
             length: $length
         );
 
-        return $product->saveProduct();
+        echo json_encode($product->saveProduct());
     }
 }

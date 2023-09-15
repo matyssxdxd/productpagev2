@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Core\Product;
-
-class BookModel extends Product
+class BookModel extends ProductModel
 {
 
     private int $weight;
@@ -23,6 +21,16 @@ class BookModel extends Product
 
     public function saveProduct(): array
     {
+        if (empty($this->getWeight())) {
+            return ['status' => 400, 'message' => 'Please, submit required data'];
+        }
+        if (!is_numeric($this->getPrice()) || !is_numeric($this->getWeight())) {
+            return ['status' => 400, 'message' => 'Please, provide the data of indicated type'];
+        }
+        if ($this->isSkuTaken($this->getSku())) {
+            return ['status' => 400, 'message' => 'SKU is already taken'];
+        }
+
         $this->query("INSERT INTO products(sku, name, price, type, weight) VALUES (:sku, :name, :price, :type, :weight)", [
             "sku" => $this->getSku(),
             "name" => $this->getName(),
@@ -31,7 +39,7 @@ class BookModel extends Product
             "weight" => $this->getWeight()
         ]);
 
-        return ["status" => 1, "message" => "yay"];
+        return ["status" => 200, "message" => "success"];
     }
 
 }

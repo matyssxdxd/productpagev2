@@ -1,10 +1,11 @@
 <?php
 
-namespace Core;
+namespace App\Models;
 
 use App\Interfaces\ProductInterface;
+use Core\Database;
 
-abstract class Product extends Database implements ProductInterface
+abstract class ProductModel extends Database implements ProductInterface
 {
     private string $sku;
     private string $name;
@@ -16,7 +17,7 @@ abstract class Product extends Database implements ProductInterface
         return $this->sku;
     }
 
-    public function setSku(string $sku): Product
+    public function setSku(string $sku): ProductModel
     {
         $this->sku = $sku;
 
@@ -28,7 +29,7 @@ abstract class Product extends Database implements ProductInterface
         return $this->name;
     }
 
-    public function setName(string $name): Product
+    public function setName(string $name): ProductModel
     {
         $this->name = $name;
 
@@ -40,7 +41,7 @@ abstract class Product extends Database implements ProductInterface
         return $this->price;
     }
 
-    public function setPrice(int $price): Product
+    public function setPrice(int $price): ProductModel
     {
         $this->price = $price;
 
@@ -52,11 +53,26 @@ abstract class Product extends Database implements ProductInterface
         return $this->type;
     }
 
-    public function setType(string $type): Product
+    public function setType(string $type): ProductModel
     {
         $this->type = $type;
 
         return $this;
     }
+
+    protected function isSkuTaken(string $sku): bool
+    {
+        $skuList = $this->query("SELECT sku FROM products")->findAll();
+
+        foreach ($skuList as $value)
+        {
+            if ($value["sku"] == $sku) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }

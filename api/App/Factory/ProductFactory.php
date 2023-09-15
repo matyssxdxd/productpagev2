@@ -3,24 +3,24 @@
 namespace App\Factory;
 
 use App\Models\BookModel;
-use App\Models\FurnitureModel;
 use App\Models\DVDModel;
-use Core\Product;
+use App\Models\FurnitureModel;
+use App\Models\ProductModel;
 
 class ProductFactory
 {
     public function create(
-        Product $product,
-        string  $name,
-        string  $sku,
-        int     $price,
-        string  $type,
-        ?string $weight = null,
-        ?string $size = null,
-        ?string $width = null,
-        ?string $height = null,
-        ?string $length = null
-    ): Product
+        ProductModel $product,
+        string       $name,
+        string       $sku,
+        int          $price,
+        string       $type,
+        ?int      $weight = null,
+        ?int      $size = null,
+        ?int      $width = null,
+        ?int      $height = null,
+        ?int      $length = null
+    ): ProductModel
     {
         $product = (new $product)
             ->setName($name)
