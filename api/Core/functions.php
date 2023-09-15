@@ -15,3 +15,10 @@ function base_path($path): string
 {
     return BASE_PATH . $path;
 }
+
+function error($responseCode, $errorMessage)
+{
+    http_response_code($responseCode);
+    echo json_encode(["message" => $errorMessage]);
+    die();
+}

@@ -14,7 +14,7 @@ function AddProduct() {
 
   const [selected, setSelected] = useState(options[0].value);
   const [inputs, setInputs] = useState({});
-  const [attributes, setAttributes] = useState([]);
+  const [attributes, setAttributes] = useState({});
   const [error, setError] = useState();
 
   const handleChange = (event: {
@@ -31,23 +31,19 @@ function AddProduct() {
 
   const handleType = (event: { target: { name: string; value: string } }) => {
     setSelected(event.target.value);
-    setAttributes([]);
+    setAttributes({});
     handleChange(event);
   };
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(inputs);
-    console.log(attributes);
     axios
-      .post("http://127.0.0.1:8989/api/addproduct", { inputs, attributes })
-      .then((response) => {
-        console.log(response);
-        if (response.data.status !== 200) {
-          setError(response.data.message);
-        } else {
-          navigate("/");
-        }
+      .post("http://127.0.0.1:8989/api/addproduct", document.querySelector('#product_form'))
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
       });
   };
 

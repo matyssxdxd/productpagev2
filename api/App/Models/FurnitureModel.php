@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class FurnitureModel extends ProductModel
+use Core\Product;
+
+class FurnitureModel extends Product
 {
 
     private int $height;
@@ -14,7 +16,7 @@ class FurnitureModel extends ProductModel
         return $this->height;
     }
 
-    public function setHeight(int $height): FurnitureModel
+    public function setHeight(?int $height): FurnitureModel
     {
         $this->height = $height;
 
@@ -26,7 +28,7 @@ class FurnitureModel extends ProductModel
         return $this->width;
     }
 
-    public function setWidth(int $width): FurnitureModel
+    public function setWidth(?int $width): FurnitureModel
     {
         $this->width = $width;
 
@@ -38,7 +40,7 @@ class FurnitureModel extends ProductModel
         return $this->length;
     }
 
-    public function setLength(int $length): FurnitureModel
+    public function setLength(?int $length): FurnitureModel
     {
         $this->length = $length;
 
@@ -48,13 +50,13 @@ class FurnitureModel extends ProductModel
     public function saveProduct(): array
     {
         if (empty($this->getHeight()) || empty($this->getWidth()) || empty($this->getLength())) {
-            return ['status' => 0, 'message' => 'Please, submit required data'];
+            error(400, "Please, submit required data");
         }
         if (!is_numeric($this->getPrice()) || !is_numeric($this->getHeight()) || !is_numeric($this->getWidth()) || !is_numeric($this->getLength())) {
-            return ['status' => 0, 'message' => 'Please, provide the data of indicated type'];
+            error(400, "Please, provide the data of indicated type");
         }
         if ($this->isSkuTaken($this->getSku())) {
-            return ['status' => 400, 'message' => 'SKU is already taken'];
+            error(400, "SKU is already taken");
         }
 
         $this->query("INSERT INTO products(sku, name, price, type, height, width, length) VALUES (:sku, :name, :price, :type, :height, :width, :length)", [
@@ -67,7 +69,7 @@ class FurnitureModel extends ProductModel
             "length" => $this->getLength()
         ]);
 
-        return ["status" => 200];
+        return [];
     }
 
 

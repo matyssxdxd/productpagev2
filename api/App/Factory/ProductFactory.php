@@ -5,22 +5,22 @@ namespace App\Factory;
 use App\Models\BookModel;
 use App\Models\DVDModel;
 use App\Models\FurnitureModel;
-use App\Models\ProductModel;
+use Core\Product;
 
 class ProductFactory
 {
     public function create(
-        ProductModel $product,
-        string       $name,
-        string       $sku,
-        int          $price,
-        string       $type,
-        ?int      $weight = null,
-        ?int      $size = null,
-        ?int      $width = null,
-        ?int      $height = null,
-        ?int      $length = null
-    ): ProductModel
+        Product $product,
+        string  $name,
+        string  $sku,
+        int     $price,
+        string  $type,
+        ?int    $weight = null,
+        ?int    $size = null,
+        ?int    $width = null,
+        ?int    $height = null,
+        ?int    $length = null
+    ): Product
     {
         $product = (new $product)
             ->setName($name)

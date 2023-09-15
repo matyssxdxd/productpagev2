@@ -42,6 +42,11 @@ class Router
         return $this->add($uri, $params, "POST");
     }
 
+    public function delete($uri, $params): static
+    {
+        return $this->add($uri, $params, "DELETE");
+    }
+
     /**
      * @throws \ReflectionException
      */

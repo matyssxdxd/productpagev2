@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Core;
 
 use App\Interfaces\ProductInterface;
-use Core\Database;
 
-abstract class ProductModel extends Database implements ProductInterface
+abstract class Product extends Database implements ProductInterface
 {
     private string $sku;
     private string $name;
@@ -17,7 +16,7 @@ abstract class ProductModel extends Database implements ProductInterface
         return $this->sku;
     }
 
-    public function setSku(string $sku): ProductModel
+    public function setSku(string $sku): Product
     {
         $this->sku = $sku;
 
@@ -29,7 +28,7 @@ abstract class ProductModel extends Database implements ProductInterface
         return $this->name;
     }
 
-    public function setName(string $name): ProductModel
+    public function setName(string $name): Product
     {
         $this->name = $name;
 
@@ -41,7 +40,7 @@ abstract class ProductModel extends Database implements ProductInterface
         return $this->price;
     }
 
-    public function setPrice(int $price): ProductModel
+    public function setPrice(int $price): Product
     {
         $this->price = $price;
 
@@ -53,7 +52,7 @@ abstract class ProductModel extends Database implements ProductInterface
         return $this->type;
     }
 
-    public function setType(string $type): ProductModel
+    public function setType(string $type): Product
     {
         $this->type = $type;
 
@@ -73,6 +72,5 @@ abstract class ProductModel extends Database implements ProductInterface
 
         return false;
     }
-
 
 }
