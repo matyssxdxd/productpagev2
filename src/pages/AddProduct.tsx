@@ -3,6 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AddProduct.css";
 
+interface Inputs {
+  sku: string,
+  name: string,
+  price: number | string,
+  type: string
+}
+
+interface Attributes {
+  size: number | string,
+  weight: number | string,
+  height: number | string,
+  width: number | string,
+  length: number | string,
+}
+
 function AddProduct() {
   const navigate = useNavigate();
 
@@ -13,10 +28,21 @@ function AddProduct() {
     { value: "Furniture", text: "Furniture" },
   ];
 
-  const [selected, setSelected] = useState(options[0].value);
-  const [inputs, setInputs] = useState({});
-  const [attributes, setAttributes] = useState({});
-  const [error, setError] = useState();
+  const [selected, setSelected] = useState<string>(options[0].value);
+  const [inputs, setInputs] = useState<Inputs>({
+    sku: "",
+    name: "",
+    price: "",
+    type: ""
+  });
+  const [attributes, setAttributes] = useState<Attributes>({
+    size: "",
+    weight: "",
+    height: "",
+    width: "",
+    length: ""
+  });
+  const [error, setError] = useState<string>();
 
   const handleChange = (event: {
     target: { name: string; value: number | string };
@@ -32,7 +58,13 @@ function AddProduct() {
 
   const handleType = (event: { target: { name: string; value: string } }) => {
     setSelected(event.target.value);
-    setAttributes({});
+    setAttributes({
+      size: "",
+      weight: "",
+      height: "",
+      width: "",
+      length: ""
+    });
     handleChange(event);
   };
 
@@ -53,6 +85,7 @@ function AddProduct() {
 
   return (
     <div className="container">
+      <button onClick={() => {console.log(inputs); console.log(attributes)}}></button>
       <div className="nav">
         <h1>Product Add</h1>
         <div className="nav-btns">
@@ -65,6 +98,7 @@ function AddProduct() {
         {error !== "" ? <div className="error-message">{error}</div> : null}
         <form id="product_form" onSubmit={handleSubmit}>
           <input
+            value={inputs.sku}
             type="text"
             id="sku"
             name="sku"
@@ -72,6 +106,7 @@ function AddProduct() {
             onChange={handleChange}
           />
           <input
+            value={inputs.name}
             type="text"
             id="name"
             name="name"
@@ -79,6 +114,7 @@ function AddProduct() {
             onChange={handleChange}
           />
           <input
+            value={inputs.price}
             type="text"
             id="price"
             name="price"
@@ -100,6 +136,7 @@ function AddProduct() {
           {selected === "DVD" ? (
             <div className="selected">
               <input
+                value={attributes.size}
                 key="size"
                 type="text"
                 id="size"
@@ -112,6 +149,7 @@ function AddProduct() {
           ) : selected === "Book" ? (
             <div className="selected">
               <input
+                value={attributes.weight}
                 key="weight"
                 type="text"
                 id="weight"
@@ -124,6 +162,7 @@ function AddProduct() {
           ) : selected === "Furniture" ? (
             <div className="selected">
               <input
+                value={attributes.height}
                 key="height"
                 type="text"
                 id="height"
@@ -132,6 +171,7 @@ function AddProduct() {
                 onChange={handleChange}
               />
               <input
+                value={attributes.width}
                 key="width"
                 type="text"
                 id="width"
@@ -140,6 +180,7 @@ function AddProduct() {
                 onChange={handleChange}
               />
               <input
+                value={attributes.length}
                 key="length"
                 type="text"
                 id="length"

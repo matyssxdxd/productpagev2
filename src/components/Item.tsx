@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactPropTypes } from 'react'
+import React, { ChangeEvent } from 'react'
 import { Product } from '../pages/Home'
 import "./Item.css";
 
@@ -9,7 +9,7 @@ interface ItemProps {
 
 function Item({product, onChange}: ItemProps) {
 
-    const { sku, name, price, type, size, weight, height, width, length } = product;
+    const { sku, name, price, size, weight, height, width, length } = product;
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const {id, checked} = event.target;
@@ -21,7 +21,7 @@ function Item({product, onChange}: ItemProps) {
         <input type="checkbox" id={sku} className="delete-checkbox" onChange={handleChange} />
         <p>{sku}</p>
         <p>{name}</p>
-        <p>{price} $</p>
+        <p>{price}.00 $</p>
         {size !== null && <p>Size: {size} MB</p>}
         {weight !== null && <p>Weight: {weight}KG</p>}
         {height !== null && width !== null && length !== null && (
