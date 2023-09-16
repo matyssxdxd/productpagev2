@@ -34,7 +34,7 @@ function Home() {
 
   const getProducts = () => {
     axios
-      .get("http://127.0.0.1:8989/api/getproducts")
+      .get("http://productpagematyss.x10.mx/api/getproducts")
       .then((response) => {
         setProducts(response.data);
       })
@@ -47,7 +47,7 @@ function Home() {
     if (selected.length !== 0) {
       selected.forEach((id) => {
         axios
-          .post("http://127.0.0.1:8989/api/deleteproduct", {
+          .post("http://productpagematyss.x10.mx/api/deleteproduct", {
             sku: id,
           })
           .then((response) => {
