@@ -87,8 +87,10 @@ function AddProduct() {
     <div className="container">
       <div className="nav">
         <h1>Product Add</h1>
+        <div className="nav-btns">
           <button onClick={handleSubmit} className="nav-btn">Save</button>
           <Link to="/" className="nav-btn">Cancel</Link>
+        </div>
       </div>
       <hr />
       <div className="form-container">
