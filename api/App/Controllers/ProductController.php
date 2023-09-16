@@ -11,7 +11,7 @@ use App\Models\ProductsModel;
 class ProductController
 {
 
-    public function addProduct()
+    public function addProduct(): void
     {
 
         $sku = array_key_exists("sku", $_POST) ? $_POST["sku"] : null;
