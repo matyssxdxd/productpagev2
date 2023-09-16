@@ -71,7 +71,7 @@ function Home() {
       <hr />
       <div className="content-container">
         <div className="item-container">
-        {Array.isArray(products) && products.length > 0 ? (
+        {products && products.length > 0 ? (
             products.map((product) => (
               <Item
                 key={product.sku}
