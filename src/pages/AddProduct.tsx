@@ -87,7 +87,7 @@ function AddProduct() {
     <div className="container">
       <div className="nav">
         <h1>Product Add</h1>
-          <button onClick={handleSubmit} className="nav-btn">Save</button>
+          <button onPointerEnter={handleSubmit} className="nav-btn">Save</button>
           <Link to="/" className="nav-btn">Cancel</Link>
       </div>
       <hr />
