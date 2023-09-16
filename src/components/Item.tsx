@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactPropTypes } from 'react'
 import { Product } from '../pages/Home'
+import "./Item.css";
 
 interface ItemProps {
     product: Product;
@@ -16,7 +17,7 @@ function Item({product, onChange}: ItemProps) {
     }
 
   return (
-    <div>
+    <div className='item'>
         <input type="checkbox" id={sku} className="delete-checkbox" onChange={handleChange} />
         <p>{sku}</p>
         <p>{name}</p>

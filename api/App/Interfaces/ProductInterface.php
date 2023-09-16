@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface ProductInterface
 {
-    public function saveProduct(): array;
+    public function saveProduct(): void;
 }

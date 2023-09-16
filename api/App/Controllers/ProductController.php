@@ -25,14 +25,10 @@ class ProductController
         $length = array_key_exists("length", $_POST) ? (int)$_POST["length"] : null;
 
         if (empty($productType)) {
-            http_response_code(400);
-            echo json_encode(["message" => "Please, select a type"]);
-            die();
+            error(400, "Please, select a type");
         }
         else if (empty($name) || empty($sku) || empty($price)) {
-            http_response_code(400);
-            echo json_encode(["message" => "Please, provide the required data"]);
-            die();
+            error(400, "Please, provide the required data");
         }
 
         match ($productType) {
@@ -57,12 +53,12 @@ class ProductController
         echo json_encode($product->saveProduct());
     }
 
-    public function getProducts()
+    public function getProducts(): void
     {
         echo json_encode((new ProductsModel())->getAllProducts());
     }
 
-    public function deleteProduct()
+    public function deleteProduct(): void
     {
         $input = json_decode(file_get_contents("php://input"));
         (new ProductsModel())->deleteProduct($input->sku);

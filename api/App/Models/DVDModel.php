@@ -21,7 +21,7 @@ class DVDModel extends Product
         return $this;
     }
 
-    public function saveProduct(): array
+    public function saveProduct(): void
     {
         if (empty($this->getSize())) {
             error(400, "Please, submit required data");
@@ -41,7 +41,6 @@ class DVDModel extends Product
             "size" => $this->getSize()
         ]);
 
-        return [];
     }
 
 }

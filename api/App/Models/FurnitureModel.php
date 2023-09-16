@@ -47,7 +47,7 @@ class FurnitureModel extends Product
         return $this;
     }
 
-    public function saveProduct(): array
+    public function saveProduct(): void
     {
         if (empty($this->getHeight()) || empty($this->getWidth()) || empty($this->getLength())) {
             error(400, "Please, submit required data");
@@ -68,8 +68,6 @@ class FurnitureModel extends Product
             "width" => $this->getWidth(),
             "length" => $this->getLength()
         ]);
-
-        return [];
     }
 
 

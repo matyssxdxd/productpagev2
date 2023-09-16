@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./AddProduct.css";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -51,14 +52,15 @@ function AddProduct() {
   };
 
   return (
-    <>
+    <div className="container">
       <div className="nav">
         <h1>Product Add</h1>
-        <div className="nav-btn">
-          <button form="product_form">Save</button>
-          <Link to="/">Cancel</Link>
+        <div className="nav-btns">
+          <button form="product_form" className="nav-btn">SAVE</button>
+          <Link to="/" className="nav-btn">CANCEL</Link>
         </div>
       </div>
+      <hr />
       <div className="form-container">
         {error !== "" ? <div className="error-message">{error}</div> : null}
         <form id="product_form" onSubmit={handleSubmit}>
@@ -68,21 +70,21 @@ function AddProduct() {
             name="sku"
             placeholder="SKU"
             onChange={handleChange}
-          ></input>
+          />
           <input
             type="text"
             id="name"
             name="name"
             placeholder="Name"
             onChange={handleChange}
-          ></input>
+          />
           <input
             type="text"
             id="price"
             name="price"
             placeholder="Price"
             onChange={handleChange}
-          ></input>
+          />
           <select
             value={selected}
             id="productType"
@@ -150,7 +152,11 @@ function AddProduct() {
           ) : null}
         </form>
       </div>
-    </>
+      <hr />
+      <div className="footer">
+        Scandiweb Test assignment
+      </div>
+    </div>
   );
 }
 

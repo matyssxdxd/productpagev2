@@ -11,7 +11,7 @@ class ProductsModel extends Database
         return $this->query("SELECT * FROM products")->findAll();
     }
 
-    public function deleteProduct(string $sku)
+    public function deleteProduct(string $sku): void
     {
         $this->query("DELETE FROM products WHERE sku = :sku", [
             "sku" => $sku

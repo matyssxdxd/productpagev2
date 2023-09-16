@@ -16,9 +16,16 @@ function base_path($path): string
     return BASE_PATH . $path;
 }
 
-function error($responseCode, $errorMessage)
+#[NoReturn] function error($responseCode, $errorMessage): void
 {
     http_response_code($responseCode);
     echo json_encode(["message" => $errorMessage]);
+    die();
+}
+
+function success($responseCode, $message): void
+{
+    http_response_code($responseCode);
+    echo json_encode(["message" => $message]);
     die();
 }

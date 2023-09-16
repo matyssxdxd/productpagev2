@@ -21,7 +21,7 @@ class BookModel extends Product
         return $this;
     }
 
-    public function saveProduct(): array
+    public function saveProduct(): void
     {
         if (empty($this->getWeight())) {
             error(400, "Please, submit required data");
@@ -41,7 +41,6 @@ class BookModel extends Product
             "weight" => $this->getWeight()
         ]);
 
-        return [];
     }
 
 }

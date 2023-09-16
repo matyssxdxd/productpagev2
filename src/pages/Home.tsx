@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Item from "../components/Item";
+import "./Home.css";
 
 export interface Product {
   sku: string;
@@ -58,31 +59,32 @@ function Home() {
     }
   };
 
-  // const removeSecond = () => {
-  //   setFruits((current) =>
-  //     current.filter((fruit) => fruit.id !== 2)
-  //   );
-  // };
-
   return (
-    <>
+    <div className="container">
       <div className="nav">
         <h1>Product List</h1>
-        <div className="nav-btn">
-          <Link to="/addproduct">ADD</Link>
-          <button onClick={massDelete}>MASS DELETE</button>
+        <div className="nav-btns">
+          <Link to="/addproduct" className="nav-btn">ADD</Link>
+          <button id="delete-product-btn" onClick={massDelete} className="nav-btn">MASS DELETE</button>
         </div>
       </div>
-      <div className="item-container">
-        {products.map((product) => (
-          <Item
-            key={product.sku}
-            product={product}
-            onChange={handleItemChange}
-          />
-        ))}
+      <hr />
+      <div className="content-container">
+        <div className="item-container">
+          {products.map((product) => (
+            <Item
+              key={product.sku}
+              product={product}
+              onChange={handleItemChange}
+            />
+          ))}
+        </div>
       </div>
-    </>
+      <hr />
+      <div className="footer">
+        <p>Scandiweb Test assignment</p>
+      </div>
+    </div>
   );
 }
 
