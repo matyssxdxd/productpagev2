@@ -87,13 +87,13 @@ function AddProduct() {
     <div className="container">
       <div className="nav">
         <h1>Product Add</h1>
-          <button onPointerEnter={handleSubmit} className="nav-btn">Save</button>
+          <button onClick={handleSubmit} className="nav-btn">Save</button>
           <Link to="/" className="nav-btn">Cancel</Link>
       </div>
       <hr />
       <div className="form-container">
         {error !== "" ? <div className="error-message">{error}</div> : null}
-        <form id="product_form" onSubmit={handleSubmit}>
+        <form id="product_form">
           <input
             value={inputs.sku}
             type="text"
