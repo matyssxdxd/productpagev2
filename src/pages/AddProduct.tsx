@@ -85,7 +85,6 @@ function AddProduct() {
 
   return (
     <div className="container">
-      <button onClick={() => {console.log(inputs); console.log(attributes)}}></button>
       <div className="nav">
         <h1>Product Add</h1>
         <div className="nav-btns">
