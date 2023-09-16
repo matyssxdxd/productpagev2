@@ -87,7 +87,7 @@ function AddProduct() {
     <div className="container">
       <div className="nav">
         <h1>Product Add</h1>
-          <button form="product_form">Save</button>
+          <button form="product_form" style={{height: "100px", width:"250px"}}>Save</button>
           <Link to="/" className="nav-btn">Cancel</Link>
       </div>
       <hr />
