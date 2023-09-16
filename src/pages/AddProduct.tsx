@@ -72,7 +72,7 @@ function AddProduct() {
     event.preventDefault();
     axios
       .post(
-        "http://productpagematyss.x10.mx/api/addproduct",
+        "https://productpagematyss.x10.mx/api/addproduct",
         document.querySelector("#product_form")
       )
       .then(() => {

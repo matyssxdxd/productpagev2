@@ -5,8 +5,6 @@ header('Access-Control-Allow-Methods: *');
 header('Access-Control-Allow-Headers: *');
 const BASE_PATH = __DIR__ . "/../";
 
-require BASE_PATH . "Core/functions.php";
-
 spl_autoload_register(function ($className) {
     $classPath = str_replace('\\', '/', $className);
     $classFile = BASE_PATH . '/' . $classPath . '.php';

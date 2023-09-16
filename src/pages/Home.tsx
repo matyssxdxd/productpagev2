@@ -34,7 +34,7 @@ function Home() {
 
   const getProducts = () => {
     axios
-      .get("http://productpagematyss.x10.mx/api/getproducts")
+      .get("https://productpagematyss.x10.mx/api/getproducts")
       .then((response) => {
         setProducts(response.data);
       })
@@ -47,7 +47,7 @@ function Home() {
     if (selected.length !== 0) {
       selected.forEach((id) => {
         axios
-          .post("http://productpagematyss.x10.mx/api/deleteproduct", {
+          .post("https://productpagematyss.x10.mx/api/deleteproduct", {
             sku: id,
           })
           .then((response) => {
@@ -71,13 +71,16 @@ function Home() {
       <hr />
       <div className="content-container">
         <div className="item-container">
-          {products.map((product) => (
-            <Item
-              key={product.sku}
-              product={product}
-              onChange={handleItemChange}
-            />
-          ))}
+        {Array.isArray(products) && products.length > 0 ? (
+            products.map((product) => (
+              <Item
+                key={product.sku}
+                product={product}
+                onChange={handleItemChange}
+              />
+            ))
+          ) : null}
+
         </div>
       </div>
       <hr />
