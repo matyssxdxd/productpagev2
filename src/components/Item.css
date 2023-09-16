@@ -1,0 +1,27 @@
+.item {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 0.3rem solid rgba(0, 0, 0, 1);
+    border-radius: 3%;
+    text-align: center;
+    padding: 0.3srem;
+    width: 200px;
+    height: 150px;
+    margin: 0;
+}
+
+.item > p {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
+.item > input {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
